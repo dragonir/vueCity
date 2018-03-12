@@ -1,0 +1,122 @@
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+p,
+blockquote,
+pre,
+hr,
+figure,
+table,
+caption,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+menu {
+  margin: 0;
+  padding: 0;
+}
+
+
+li {
+  list-style: none;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+input {
+  outline: none;
+}
+p {
+  margin: 0;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+
+.adress{
+  padding: 80px 3%;
+}
+.adress input{
+  width: 100%;
+  border: 1px solid #eee;
+  height: 44px;
+  border-radius: 6px;
+  padding-left: 6%;
+  text-align: center;
+}
+
+.model_box{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 66;
+  top: 0;
+}
+
+.address_box{
+  position: absolute;
+  bottom: 0;
+  background: #fff;
+  width: 100%;
+}
+.address_box ul{
+  width: 33%;
+  text-align: center;
+  line-height: 36px;
+  overflow-y: scroll;
+  height: 260px;
+  overflow-x: auto;
+}
+
+.address_box .city_box{
+  position: absolute;
+  left: 33%;
+  width: 100%;
+  top: 0;
+  display: none;
+}
+
+
+
+.address_box .area_box{
+  position: absolute;
+  left:33%;
+  width: 34%;
+  top: 0;
+  z-index: 999;
+  display: none;
+  height: 260px;
+}
+.address_box ul li.active {
+  background: #ccc;
+}
+.address_box .active .city_box{
+  display: block;
+}
+.address_box .city_box .active .area_box{
+  display: block;
+}
+
+

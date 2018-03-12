@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+		<title>添加收获地址</title>
+		<link rel="stylesheet" href="css/base.css" />
+	</head>
+	<body>
+
+		<div id="app">
+			<div class="adress" @click="addressModel=true">
+				<input type="text" placeholder="选择地区" :value="addressText" readonly />
+			</div>
+
+			<div class="model_box" v-show="addressModel" @click.stop="addressModel=false">
+				<div class="address_box">
+					<ul class="province_box">
+						<li v-for="(provinceItem,provinceIndex) in addressList" :class="{active:provinceIndex==activeProvince}" @click.stop="onProvinceSelect(provinceItem.text,provinceIndex)">
+							<span>{{provinceItem.text}}</span>	
+							<div class="city_box">
+								<ul>
+									<li v-for="(cityItem,cityIndex) in provinceItem.children" :class="{active:cityIndex==activeCity}"@click.stop="onCitySelect(cityItem.text,cityIndex)">
+										<span>{{cityItem.text}}</span>
+										<ul class="area_box">
+											<li v-for="(areaItem,areaIndex) in cityItem.children" :class="{active:areaIndex==activeArea}" @click.stop="onAreaSelect(areaItem.text,areaIndex)">
+												<span>{{areaItem.text}}</span>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			
+
+		</div>
+		<script src="js/vue.js"></script>
+		<script src="js/city.js"></script>
+		<script>		
+			new Vue({
+				el: "#app",
+				data: {
+					addressModel: false, /*选择地址选择模态框*/
+					addressList: [], //城市列表
+					province: '', //选中的省份 
+					city: '', //选中的城市
+					area: '', //选择的区域
+					addressText: '请选择', //选中的完整地址
+					activeProvince: 0, 
+					activeCity: 0,
+					activeArea: 0,
+					isUse:false
+				},
+				mounted: function() {
+					const that = this;
+					that.addressList = city_picker;
+				},
+				methods: {
+					/*选择省份*/
+					onProvinceSelect: function(item,index) {
+						var that = this;
+						that.activeProvince = index;
+						that.province = item;
+						that.addressText = item;
+						that.isUse = false
+					},
+					/*选择城市*/
+					onCitySelect: function(item,index) {
+						var that = this;
+						that.activeCity = index;
+						that.city = item;
+						that.addressText = that.province + " " + that.city;
+						that.isUse = true
+					},
+					/*选择区域*/
+					onAreaSelect: function(item,index) {
+						var that = this;
+						if(that.isUse){
+							that.activeArea = index;
+							that.area = item;
+							that.addressText = that.province + " " + that.city + " " + that.area;
+							that.addressModel = false
+						}
+						
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>
