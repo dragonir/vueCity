@@ -9,7 +9,7 @@
 	</head>
 	<body>
 
-		<div id="app">
+		<div id="app" v-cloak>
 			<div class="adress" @click="addressModel=true">
 				<input type="text" placeholder="选择地区" :value="addressText" readonly />
 			</div>
@@ -54,7 +54,7 @@
 					activeProvince: 0, 
 					activeCity: 0,
 					activeArea: 0,
-					isUse:false
+					isUse:false //防止用户直接选择区域
 				},
 				mounted: function() {
 					const that = this;
